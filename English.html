@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taras Shevchenko | The Soul of Ukraine</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Основні змінні --- */
+        :root {
+            --primary: #1e272e; /* Глибокий темний */
+            --accent: #f1c40f;  /* Золотий акцент */
+            --text-dark: #2c3e50;
+            --text-light: #ecf0f1;
+            --glass: rgba(255, 255, 255, 0.8); /* Ефект скла */
+            --shadow: 0 15px 35px rgba(0,0,0,0.1);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- Скидання стилів та Основа --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; } /* Плавний скрол */
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #fdfcfb, #e2d1c3, #fdfbfb, #ebedee);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite; /* Анімований фон */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Індикатор скролу --- */
+        #progress-container { width: 100%; height: 4px; background: transparent; position: fixed; top: 0; z-index: 10000; }
+        #progress-bar { height: 100%; background: linear-gradient(to right, var(--accent), #e67e22); width: 0%; border-radius: 0 2px 2px 0; }
+
+        /* --- Героїчна Шапка (Hero Section) --- */
+        header { 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('images/hero-bg.jpg'); 
+            background-attachment: fixed; /* Палалакс */
+            background-size: cover; background-position: center;
+            height: 100vh; color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        header h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 5rem; font-weight: 900; 
+            margin-bottom: 15px; text-transform: uppercase; letter-spacing: 4px; 
+            background: linear-gradient(to bottom, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+        
+        header p { font-size: 1.4rem; font-weight: 300; max-width: 700px; letter-spacing: 1px; opacity: 0.9; }
+
+        /* Кнопка скролу вниз */
+        .scroll-down { position: absolute; bottom: -55px; font-size: 2.5rem; color: var(--accent); animation: bounce 2s infinite; cursor: pointer; opacity: 0.7; transition: var(--transition); }
+        .scroll-down:hover { opacity: 1; transform: scale(1.1); }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-15px) translateX(-50%); } 60% { transform: translateY(-7px) translateX(-50%); } }
+        .scroll-down { left: 50%; transform: translateX(-50%); }
+
+        /* --- Основний контейнер --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 100px 20px; }
+        
+        /* Заголовки секцій */
+        h2 { 
+            font-family: 'Playfair Display', serif; color: var(--primary); 
+            font-size: 3rem; text-align: center; margin-bottom: 60px; 
+            position: relative; padding-bottom: 15px; 
+        }
+        h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: var(--accent); border-radius: 2px; }
+        h2 span { color: #e67e22; }
+        h2 i { font-size: 2.5rem; margin-right: 15px; color: var(--accent); vertical-align: middle; }
+
+        /* --- Блок біографії (Glassmorphism) --- */
+        .bio-text { 
+            background: var(--glass); padding: 50px; 
+            border-radius: 20px; border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: var(--shadow); margin-bottom: 80px; 
+            font-size: 1.15rem; text-align: justify; position: relative;
+            backdrop-filter: blur(10px); /* Розмиття фону */
+        }
+        .bio-text p { margin-bottom: 25px; }
+        .bio-text p:last-child { margin-bottom: 0; }
+        .bio-text strong { color: #e67e22; font-weight: 600; }
+        
+        /* Велика капітель (перша буква) */
+        .bio-text p:first-child::first-letter { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--accent); float: left; margin-right: 10px; line-height: 1; }
+
+        /* --- Покращений Таймлайн --- */
+        .timeline { border-left: 4px solid var(--primary); padding-left: 40px; margin: 0 auto 80px auto; max-width: 700px; position: relative; }
+        .timeline-item { 
+            margin-bottom: 40px; position: relative; 
+            background: var(--glass); padding: 20px 25px; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+        .timeline-item:hover { transform: translateX(10px); box-shadow: var(--shadow); }
+        
+        /* Точка на лінії */
+        .timeline-item::before { 
+            content: ''; width: 20px; height: 20px; background: var(--accent); 
+            border-radius: 50%; position: absolute; left: -54px; top: 50%; 
+            transform: translateY(-50%); box-shadow: 0 0 0 6px rgba(255,255,255,0.8), 0 0 15px rgba(241, 196, 15, 0.5); 
+            transition: var(--transition);
+        }
+        .timeline-item:hover::before { background: #e67e22; scale: 1.2; }
+        
+        .timeline-date { font-weight: 700; color: #e67e22; font-size: 1.3rem; margin-bottom: 5px; font-family: 'Playfair Display', serif; }
+        .timeline-text { font-size: 1.05rem; color: var(--text-dark); font-weight: 400; }
+
+        /* --- Преміум Галерея --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .gallery-item { 
+            position: relative; overflow: hidden; border-radius: 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+            transition: var(--transition); cursor: pointer;
+            border: 4px solid #fff;
+        }
+        
+        .gallery-item img { width: 100%; height: 350px; object-fit: cover; transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); display: block; }
+        
+        /* Оверлей при наведенні */
+        .gallery-item-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+            opacity: 0; transition: var(--transition);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 25px;
+        }
+        
+        .gallery-item:hover { transform: translateY(-10px); box-shadow: var(--shadow); border-color: var(--accent); }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+        
+        .gallery-item-title { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; transform: translateY(20px); transition: var(--transition); }
+        .gallery-item:hover .gallery-item-title { transform: translateY(0); }
+        
+        .overlay-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5); color: #fff; font-size: 3rem; opacity: 0; transition: var(--transition); }
+        .gallery-item:hover .overlay-icon { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+
+        /* --- Кнопка Нагору --- */
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            background: var(--accent); color: var(--primary);
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem; cursor: pointer;
+            box-shadow: var(--shadow); opacity: 0; visibility: hidden;
+            transition: var(--transition); z-index: 999;
+        }
+        #back-to-top:hover { background: #e67e22; color: #fff; transform: translateY(-5px); }
+        #back-to-top.show { opacity: 1; visibility: visible; }
+
+        /* --- Футер --- */
+        footer { background: var(--primary); color: var(--text-light); padding: 40px 20px; text-align: center; font-weight: 300; letter-spacing: 1px; }
+        footer i { color: #e74c3c; margin: 0 5px; animation: heartBeat 1.5s infinite; }
+        @keyframes heartBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* --- Адаптивність (для мобільних) --- */
+        @media (max-width: 768px) {
+            header h1 { font-size: 3rem; letter-spacing: 2px; }
+            header p { font-size: 1.1rem; }
+            h2 { font-size: 2.2rem; }
+            .bio-text { padding: 30px; font-size: 1rem; }
+            .timeline { padding-left: 30px; }
+            .timeline-item::before { left: -44px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="progress-container">
+    <div id="progress-bar"></div>
+</div>
+
+<div id="back-to-top"><i class="fas fa-arrow-up"></i></div>
+
+<header>
+    <div data-aos="zoom-in" data-aos-duration="1500">
+        <h1>Taras Shevchenko</h1>
+        <p>The spiritual father of modern Ukraine, a visionary poet, and a master artist whose words and images ignited the fight for freedom.</p>
+        <i class="fas fa-chevron-down scroll-down" onclick="document.getElementById('content').scrollIntoView()"></i>
+    </div>
+</header>
+
+<div class="container" id="content">
+    
+    <section data-aos="fade-up">
+        <h2><i class="fas fa-feather-alt"></i> The <span>Legacy</span></h2>
+        <div class="bio-text">
+            <p>Born on March 9, 1814, in the village of Moryntsi, Taras Shevchenko was destined for a life of hardship as a serf. Orphaned at a young age, he nevertheless harbored an unyielding passion for art and poetry.</p>
+            <p>His exceptional talent was noticed by prominent artists while he was in Saint Petersburg with his owner. In a defining moment for Ukrainian culture, his friends organized a lottery to purchase his freedom from serfdom in 1838. This liberated him to study at the Academy of Arts, where his genius fully blossomed.</p>
+            <p>Shevchenko's literary masterpiece, <strong>"Kobzar"</strong> (1840), became the foundation of modern Ukrainian literature. His powerful verses championed freedom and love for his homeland, often criticizing the Russian Empire. For his revolutionary ideas, he was arrested and condemned to years of exile with a ban on writing and painting. Yet, he continued to create in secret, becoming an immortal symbol of unbreakable spirit. Today, he is revered as Ukraine's national hero and prophet.</p>
+        </div>
+    </section>
+
+    <section data-aos="fade-up">
+        <h2><i class="fas fa-history"></i> Life <span>Journey</span></h2>
+        <div class="timeline">
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="timeline-date">1814</div>
+                <div class="timeline-text">Born into serfdom in Moryntsi, Kyiv Governorate.</div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="100">
+                <div class="timeline-date">1838</div>
+                <div class="timeline-text">Freed from serfdom; enters the Imperial Academy of Arts.</div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="200">
+                <div class="timeline-date">1840</div>
+                <div class="timeline-text">Publishes "Kobzar", his seminal collection of poetry.</div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="300">
+                <div class="timeline-date">1847</div>
+                <div class="timeline-text">Arrested for political activities and sent into military exile.</div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left" data-aos-delay="400">
+                <div class="timeline-date">1861</div>
+                <div class="timeline-text">Passes away in Saint Petersburg, just days before the abolition of serfdom. Reburied in Kaniv, Ukraine.</div>
+            </div>
+        </div>
+    </section>
+
+    <section data-aos="fade-up">
+        <h2><i class="fas fa-palette"></i> Art <span>Masterpieces</span></h2>
+        <div class="gallery-grid">
+    
+    <a href="portrait.jpg" class="glightbox gallery-item" data-title="Self-portrait (1840)">
+        <img src="portrait.jpg" alt="Self-portrait" />
+        <div class="gallery-item-overlay"><div class="gallery-item-title">Self-portrait</div></div>
+        <i class="fas fa-expand overlay-icon"></i>
+    </a>
+
+    <a href="kobzar.jpg" class="glightbox gallery-item" data-title="Kobzar (1840)">
+        <img src="kobzar.jpg" alt="Kobzar Cover" />
+        <div class="gallery-item-overlay"><div class="gallery-item-title">Kobzar</div></div>
+        <i class="fas fa-expand overlay-icon"></i>
+    </a>
+
+    <a href="katerina.jpg" class="glightbox gallery-item" data-title="Kateryna (1842)">
+        <img src="katerina.jpg" alt="Kateryna Painting" />
+        <div class="gallery-item-overlay"><div class="gallery-item-title">Kateryna</div></div>
+        <i class="fas fa-expand overlay-icon"></i>
+    </a>
+
+    <a href="monument.jpg" class="glightbox gallery-item" data-title="National Symbol">
+        <img src="monument.jpg" alt="Monument" />
+        <div class="gallery-item-overlay"><div class="gallery-item-title">Monument in Kyiv</div></div>
+        <i class="fas fa-expand overlay-icon"></i>
+    </a>
+
+</div>
+    </section>
+
+</div>
+
+<footer>
+    <p>©2026</p>
+    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.7;"> 2xMarkian and Vladyslav</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script>
+    // 1. Ініціалізація GLightbox (Галерея з покращеними налаштуваннями)
+    const lightbox = GLightbox({
+        touchNavigation: true,
+        loop: true,
+        descPosition: 'bottom',
+        openEffect: 'zoom',
+        closeEffect: 'fade'
+    });
+
+    // 2. Ініціалізація AOS (Анімації при скролі)
+    AOS.init({ 
+        duration: 1000, 
+        once: true,
+        offset: 100 
+    });
+
+    // 3. Елементи для скролу
+    const progressBar = document.getElementById("progress-bar");
+    const backToTopBtn = document.getElementById("back-to-top");
+
+    window.onscroll = function() {
+        // Логіка індикатора скролу
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + "%";
+
+        // Логіка кнопки Нагору
+        if (winScroll > 500) {
+            backToTopBtn.classList.add("show");
+        } else {
+            backToTopBtn.classList.remove("show");
+        }
+    };
+
+    // Подія для кнопки Нагору
+    backToTopBtn.addEventListener("click", function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+
+</body>
+</html>
